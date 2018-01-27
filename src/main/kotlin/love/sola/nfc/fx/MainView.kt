@@ -37,20 +37,29 @@ class MainView : View("SolaNFCFx") {
                 hbox {
                     label("Type:")
                     label {
-                        textProperty().bind(cardProperty.stringBinding{ it?.type?.name })
+                        textProperty().bind(cardProperty.stringBinding { it?.type?.name })
                     }
                 }
                 hbox {
                     label("UID:")
                     label {
-                        textProperty().bind(cardProperty.stringBinding { it?.getUID()?.toHexString() })
+                        textProperty().bind(cardProperty.stringBinding {
+                            it?.getUID()?.toHexString()
+                        })
                     }
                 }
             }
         }
         hbox {
             padding = tornadofx.insets(horizontal = 5)
-            border = Border(BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT))
+            border = Border(
+                BorderStroke(
+                    Color.LIGHTGRAY,
+                    BorderStrokeStyle.SOLID,
+                    CornerRadii.EMPTY,
+                    BorderWidths.DEFAULT
+                )
+            )
             label(leftStatus) { textFill = Color.GRAY }
             pane { hgrow = Priority.ALWAYS }
             label(rightStatus) { textFill = Color.GRAY }

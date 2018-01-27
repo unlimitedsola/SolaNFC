@@ -47,7 +47,12 @@ class TerminalSelectView : View("Select Card Terminal") {
             return factory.terminals().list()
         } catch (e: Exception) {
             log.log(Level.SEVERE, "Get card terminals failed.", e)
-            alert(Alert.AlertType.ERROR, "No card terminal detected.", e.message ?: "", ButtonType.OK)
+            alert(
+                Alert.AlertType.ERROR,
+                "No card terminal detected.",
+                e.message ?: "",
+                ButtonType.OK
+            )
             return emptyList()
         }
     }

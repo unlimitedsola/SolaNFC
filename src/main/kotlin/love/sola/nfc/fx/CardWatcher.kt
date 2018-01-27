@@ -36,7 +36,7 @@ class CardWatcher(val terminal: CardTerminal) : Thread("Card Watcher") {
                         }
                     }
                 }
-            } catch(e: Exception) {
+            } catch (e: Exception) {
                 log.log(Level.SEVERE, "Exception in CardWatcher", e)
             }
         }

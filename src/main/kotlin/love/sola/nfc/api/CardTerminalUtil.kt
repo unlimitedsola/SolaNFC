@@ -11,7 +11,7 @@ private val terminal by lazy {
 }
 
 fun getCard(): MifareClassic? = terminal.waitForCardPresent(0)
-        .then { terminal.connect("*") }?.let { MifareClassic(it) }
+    .then { terminal.connect("*") }?.let { MifareClassic(it) }
 
 fun waitDisconnect() = terminal.waitForCardAbsent(0)
 

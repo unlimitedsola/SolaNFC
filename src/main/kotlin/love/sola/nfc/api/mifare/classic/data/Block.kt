@@ -12,7 +12,8 @@ class Block(private val _data: ByteArray) : Cloneable, Serializable {
 
     companion object {
         val DEFAULT = Block(ByteArray(16) { 0 })
-        val DEFAULT_TRAILER = Block(Key.DEFAULT.data() + AccessBits.DEFAULT.data() + Key.DEFAULT.data())
+        val DEFAULT_TRAILER =
+            Block(Key.DEFAULT.data() + AccessBits.DEFAULT.data() + Key.DEFAULT.data())
     }
 
     constructor(data: String) : this(data.hexToByteArray())

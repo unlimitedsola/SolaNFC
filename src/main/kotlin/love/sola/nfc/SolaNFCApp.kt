@@ -13,7 +13,11 @@ import tornadofx.FX
 class SolaNFCApp : App(TerminalSelectView::class, Styles::class) {
 
     init {
-        FX.layoutDebuggerShortcut = KeyCodeCombination(KeyCode.J, KeyCodeCombination.CONTROL_DOWN, KeyCodeCombination.ALT_DOWN)
+        FX.layoutDebuggerShortcut = KeyCodeCombination(
+            KeyCode.J,
+            KeyCodeCombination.CONTROL_DOWN,
+            KeyCodeCombination.ALT_DOWN
+        )
     }
 
 }

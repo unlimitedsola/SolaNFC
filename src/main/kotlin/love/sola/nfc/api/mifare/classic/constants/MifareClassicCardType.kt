@@ -11,7 +11,12 @@ import javax.smartcardio.ATR
 enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val layout: IntArray) {
 
     MIFARE_CLASSIC_1K(0x00, 0x01, 1024, (3..63 step 4).toList().toIntArray()),
-    MIFARE_CLASSIC_4K(0x00, 0x02, 4096, ((3..127 step 4) union (143..255 step 16)).toList().toIntArray());
+    MIFARE_CLASSIC_4K(
+        0x00,
+        0x02,
+        4096,
+        ((3..127 step 4) union (143..255 step 16)).toList().toIntArray()
+    );
 
     val totalSectors get() = layout.size
     val totalBlocks get() = layout.last() + 1
@@ -26,7 +31,7 @@ enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val 
     }
 
     fun blockIndexOf(sectorIndex: Int, blockIndexOfSector: Int): Int {
-        val sectorStart = if (sectorIndex<=0) 0 else layout[sectorIndex - 1] + 1
+        val sectorStart = if (sectorIndex <= 0) 0 else layout[sectorIndex - 1] + 1
         return sectorStart + blockIndexOfSector
     }
 
@@ -45,7 +50,8 @@ enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val 
                 throw UnsupportedOperationException("Unsupported standard. only ISO 14443A Part3 standard supported.")
             return MifareClassicCardType.values().firstOrNull { type ->
                 atr.bytes[13] == type.c0 && atr.bytes[14] == type.c1
-            } ?: throw UnsupportedOperationException("Unknown card type for C0=${atr.bytes[13]} C1=${atr.bytes[14]}")
+            }
+                    ?: throw UnsupportedOperationException("Unknown card type for C0=${atr.bytes[13]} C1=${atr.bytes[14]}")
         }
     }
 

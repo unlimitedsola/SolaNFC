@@ -8,8 +8,10 @@ import java.util.*
 class KeyChain(private val _data: Array<KeyPair>) : Cloneable, Serializable {
 
     companion object {
-        val DEFAULT_1K = KeyChain(Array(MifareClassicCardType.MIFARE_CLASSIC_1K.totalSectors) { KeyPair.DEFAULT })
-        val DEFAULT_4K = KeyChain(Array(MifareClassicCardType.MIFARE_CLASSIC_4K.totalSectors) { KeyPair.DEFAULT })
+        val DEFAULT_1K =
+            KeyChain(Array(MifareClassicCardType.MIFARE_CLASSIC_1K.totalSectors) { KeyPair.DEFAULT })
+        val DEFAULT_4K =
+            KeyChain(Array(MifareClassicCardType.MIFARE_CLASSIC_4K.totalSectors) { KeyPair.DEFAULT })
     }
 
     fun data() = _data.clone()
