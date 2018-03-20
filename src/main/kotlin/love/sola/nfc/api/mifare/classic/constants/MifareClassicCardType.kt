@@ -18,7 +18,7 @@ enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val 
 
     fun sectorIndexOf(blockIndex: Int): Int {
         for ((index, value) in layout.withIndex()) {
-            if (blockIndex >= value) {
+            if (blockIndex <= value) {
                 return index
             }
         }
