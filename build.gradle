@@ -38,10 +38,10 @@ dependencies {
 
 sourceSets {
     scripts {
-        kotlin.srcDirs += 'scripts'
+        resources.srcDirs = []
+        java.srcDirs = []
+        kotlin.srcDirs = ['scripts']
         compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
         compileClasspath += main.output
-        runtimeClasspath += main.output
     }
 }
