@@ -7,12 +7,13 @@ val uid = getUIDFromUserInput()
 println("Place the card now.")
 var card = getCard()!!
 println("Card detected, origin UID:${card.getUID().toHexString()}")
-print("Modifying UID block...")
+println("Modifying UID block...")
+println("(if you get stuck here, please remove the card from your card reader.)")
 card.modifyUID(uid)
 waitDisconnect()
 println("Done. Please re-place the card.")
 card = getCard()!!
-print("Verifying uid...")
+print("Verifying UID...")
 if (card.getUID().contentEquals(uid.data.copyOf(4))) {
     println("Success.")
 } else {
