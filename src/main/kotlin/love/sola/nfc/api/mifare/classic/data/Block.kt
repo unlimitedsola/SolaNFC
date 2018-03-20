@@ -23,6 +23,9 @@ class Block(val data: ByteArray) : Cloneable, Serializable {
     val size get() = data.size
     operator fun get(index: Int): Byte = data[index]
 
+    val isValidUID: Boolean
+        get() = data[4] == (data[0].toInt() xor data[1].toInt() xor data[2].toInt() xor data[3].toInt()).toByte()
+
     override fun toString(): String {
         return "Block(${data.toHexString()})"
     }

@@ -44,7 +44,7 @@ class Dump(private val sectors: Array<Sector>) : Cloneable, Serializable {
     }.let { KeyChain(it.toTypedArray()) }
 
     val isValidUID: Boolean
-        get() = uidBlock[4] == (uidBlock[0].toInt() xor uidBlock[1].toInt() xor uidBlock[2].toInt() xor uidBlock[3].toInt()).toByte()
+        get() = uidBlock.isValidUID
 
     val size get() = sectors.size
     operator fun get(index: Int): Sector = sectors[index]
