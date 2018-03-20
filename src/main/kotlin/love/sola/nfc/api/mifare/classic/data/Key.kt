@@ -1,6 +1,7 @@
 package love.sola.nfc.api.mifare.classic.data
 
 import love.sola.nfc.util.hexToByteArray
+import love.sola.nfc.util.toHexString
 import java.io.Serializable
 
 /**
@@ -18,4 +19,7 @@ class Key(val data: ByteArray) : Cloneable, Serializable {
         val DEFAULT = Key(ByteArray(6) { 0xFF.toByte() })
     }
 
+    override fun toString(): String {
+        return "Key(${data.toHexString()})"
+    }
 }
