@@ -28,8 +28,10 @@ repositories {
 }
 
 dependencies {
-    compile 'org.jetbrains.kotlin:kotlin-stdlib-jre8'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    compile "org.jetbrains.kotlin:kotlin-reflect"
     compile 'org.jetbrains.kotlin:kotlin-script-util'
+    runtime "org.jetbrains.kotlin:kotlin-compiler-embeddable"
     compile 'no.tornado:tornadofx:1.7.10'
     compile 'com.github.thomasnield:rxkotlinfx:2.0.2'
     compile 'commons-codec:commons-codec:1.10'
