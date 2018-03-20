@@ -1,6 +1,5 @@
 package love.sola.nfc.api.mifare.classic.data
 
-import love.sola.nfc.api.mifare.classic.constants.KeyType
 import love.sola.nfc.api.mifare.classic.constants.MifareClassicCardType
 import java.io.Serializable
 import java.util.*
@@ -40,15 +39,12 @@ class Dump(private val sectors: Array<Sector>) : Cloneable, Serializable {
         }
     }
 
-    fun extractKey(keyType: KeyType): List<Key> = sectors.map {
-        when (keyType) {
-            KeyType.A -> it.keyA
-            KeyType.B -> it.keyB
-        }
-    }
+    fun extractKeyChain(): KeyChain = sectors.map {
+        KeyPair(it.keyA, it.keyB)
+    }.let { KeyChain(it.toTypedArray()) }
 
-    fun isValidUID(): Boolean =
-            uidBlock[4] == (uidBlock[0].toInt() xor uidBlock[1].toInt() xor uidBlock[2].toInt() xor uidBlock[3].toInt()).toByte()
+    val isValidUID: Boolean
+        get() = uidBlock[4] == (uidBlock[0].toInt() xor uidBlock[1].toInt() xor uidBlock[2].toInt() xor uidBlock[3].toInt()).toByte()
 
     val size get() = sectors.size
     operator fun get(index: Int): Sector = sectors[index]

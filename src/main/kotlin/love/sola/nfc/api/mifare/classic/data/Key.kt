@@ -3,6 +3,7 @@ package love.sola.nfc.api.mifare.classic.data
 import love.sola.nfc.util.hexToByteArray
 import love.sola.nfc.util.toHexString
 import java.io.Serializable
+import java.util.*
 
 /**
  * @author Sola
@@ -21,5 +22,20 @@ class Key(val data: ByteArray) : Cloneable, Serializable {
 
     override fun toString(): String {
         return "Key(${data.toHexString()})"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Key
+
+        if (!Arrays.equals(data, other.data)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return Arrays.hashCode(data)
     }
 }

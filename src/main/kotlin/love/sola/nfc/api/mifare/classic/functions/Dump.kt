@@ -5,18 +5,19 @@ import love.sola.nfc.api.mifare.classic.constants.KeyType
 import love.sola.nfc.api.mifare.classic.data.Block
 import love.sola.nfc.api.mifare.classic.data.Dump
 import love.sola.nfc.api.mifare.classic.data.Key
+import love.sola.nfc.api.mifare.classic.data.KeyChain
 
 /**
  * @author Sola
  */
-fun MifareClassic.dump(keyA: Array<Key>, keyB: Array<Key>): Dump {
+fun MifareClassic.dump(keyChain: KeyChain): Dump {
     val blocks = arrayOfNulls<Block>(type.blocksCount)
     repeat(type.blocksCount) { index ->
         val sectorIndex = type.sectorIndexOf(index)
-        if (authBlock(keyA[sectorIndex], index, KeyType.A)) {
+        if (authBlock(keyChain[sectorIndex].keyA, index, KeyType.A)) {
             blocks[index] = readBlock(index)
             MifareClassic.log.info("Dumped block $index with key A.")
-        } else if (authBlock(keyB[sectorIndex], index, KeyType.B)) {
+        } else if (authBlock(keyChain[sectorIndex].keyB, index, KeyType.B)) {
             blocks[index] = readBlock(index)
             MifareClassic.log.info("Dumped block $index with key B.")
         } else {
