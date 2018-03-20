@@ -19,7 +19,7 @@ fun MifareClassic.format(keyA: Array<Key>, keyB: Array<Key>, dump: Dump) {
                     && writeBlock(index, dump[sector][block])) {
                 MifareClassic.log.info("Formatted block $index with key B.")
             } else {
-                MifareClassic.log.severe("Failed to format block $index!")
+                MifareClassic.log.error("Failed to format block $index!")
             }
         }
     }

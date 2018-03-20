@@ -6,7 +6,7 @@ import love.sola.nfc.api.mifare.classic.data.Block
 import love.sola.nfc.api.mifare.classic.data.Key
 import love.sola.nfc.util.hexToByteArray
 import love.sola.nfc.util.toHexString
-import java.util.logging.Logger
+import org.slf4j.LoggerFactory
 import javax.smartcardio.Card
 import javax.smartcardio.CardException
 import javax.smartcardio.CommandAPDU
@@ -18,7 +18,7 @@ import javax.smartcardio.ResponseAPDU
 class MifareClassic(val card: Card) {
 
     companion object {
-        val log = Logger.getLogger(MifareClassic::javaClass.name)
+        val log = LoggerFactory.getLogger(MifareClassic::class.java)
     }
 
     val type = MifareClassicCardType.fromATR(card.atr)
@@ -40,10 +40,12 @@ class MifareClassic(val card: Card) {
     }
 
     fun writeBlock(index: Int, block: Block): Boolean {
-        return transmit(CommandAPDU(
+        return transmit(
+            CommandAPDU(
                 0xFF, 0xD6, 0x00, index,
                 block.data
-        )).sw == 0x9000
+            )
+        ).sw == 0x9000
     }
 
     fun authBlock(key: Key, block: Int, type: KeyType): Boolean {
@@ -51,21 +53,37 @@ class MifareClassic(val card: Card) {
     }
 
     fun loadKey(key: Key): Boolean {
-        return transmit(CommandAPDU(
+        return transmit(
+            CommandAPDU(
                 0xFF, 0x82, 0x00, 0x00,
                 key.data
-        )).sw == 0x9000
+            )
+        ).sw == 0x9000
     }
 
     fun authKey(block: Int, type: KeyType): Boolean {
-        return transmit(CommandAPDU(
+        return transmit(
+            CommandAPDU(
                 0xFF, 0x86, 0x00, 0x00,
                 byteArrayOf(0x01, 0x00, block.toByte(), type.code, 0x00)
-        )).sw == 0x9000
+            )
+        ).sw == 0x9000
     }
 
     fun controlLED(P2: Int, T1: Int, T2: Int, count: Int, buzzer: Int) {
-        val cmd = CommandAPDU(byteArrayOf(0xFF.toByte(), 0x00, 0x40, P2.toByte(), 0x04, T1.toByte(), T2.toByte(), count.toByte(), buzzer.toByte()))
+        val cmd = CommandAPDU(
+            byteArrayOf(
+                0xFF.toByte(),
+                0x00,
+                0x40,
+                P2.toByte(),
+                0x04,
+                T1.toByte(),
+                T2.toByte(),
+                count.toByte(),
+                buzzer.toByte()
+            )
+        )
         transmit(cmd)
     }
 

@@ -20,7 +20,7 @@ fun MifareClassic.dump(keyA: Array<Key>, keyB: Array<Key>): Dump {
             blocks[index] = readBlock(index)
             MifareClassic.log.info("Dumped block $index with key B.")
         } else {
-            MifareClassic.log.severe("Failed to dump block $index!")
+            MifareClassic.log.error("Failed to dump block $index!")
         }
     }
     return Dump.parse(blocks.requireNoNulls())
