@@ -5,19 +5,21 @@ import java.io.Serializable
 import java.util.*
 
 
-class KeyChain(val data: Array<KeyPair>) : Cloneable, Serializable {
+class KeyChain(private val _data: Array<KeyPair>) : Cloneable, Serializable {
 
     companion object {
-        val DEFAULT_1K = KeyChain(Array(MifareClassicCardType.MIFARE_CLASSIC_1K.sectorsCount) { KeyPair.DEFAULT })
-        val DEFAULT_4K = KeyChain(Array(MifareClassicCardType.MIFARE_CLASSIC_4K.sectorsCount) { KeyPair.DEFAULT })
+        val DEFAULT_1K = KeyChain(Array(MifareClassicCardType.MIFARE_CLASSIC_1K.totalSectors) { KeyPair.DEFAULT })
+        val DEFAULT_4K = KeyChain(Array(MifareClassicCardType.MIFARE_CLASSIC_4K.totalSectors) { KeyPair.DEFAULT })
     }
 
-    fun flatten(): List<Key> = data.flatMap { listOf(it.keyA, it.keyB) }.distinct()
+    fun data() = _data.clone()
 
-    operator fun get(index: Int): KeyPair = data[index]
+    fun flatten(): List<Key> = _data.flatMap { listOf(it.keyA, it.keyB) }.distinct()
+
+    operator fun get(index: Int): KeyPair = _data[index]
 
     override fun toString(): String {
-        return "KeyChain(${Arrays.toString(data)})"
+        return "KeyChain(${Arrays.toString(_data)})"
     }
 
 }

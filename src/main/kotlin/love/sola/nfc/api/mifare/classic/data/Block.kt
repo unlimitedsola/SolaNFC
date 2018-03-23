@@ -7,27 +7,29 @@ import java.io.Serializable
 /**
  * @author Sola
  */
-class Block(val data: ByteArray) : Cloneable, Serializable {
+class Block(private val _data: ByteArray) : Cloneable, Serializable {
+
+    companion object {
+        val DEFAULT = Block(ByteArray(16) { 0 })
+        val DEFAULT_TRAILER = Block(Key.DEFAULT.data() + AccessBits.DEFAULT.data() + Key.DEFAULT.data())
+    }
 
     constructor(data: String) : this(data.hexToByteArray())
 
     init {
-        check(data.size == 16) { "Block data must contains 16 bytes" }
+        check(_data.size == 16) { "Block data must contains 16 bytes" }
     }
 
-    companion object {
-        val DEFAULT = Block(ByteArray(16) { 0 })
-        val DEFAULT_TRAILER = Block(Key.DEFAULT.data + AccessBits.DEFAULT.data + Key.DEFAULT.data)
-    }
+    fun data() = _data.clone()
 
-    val size get() = data.size
-    operator fun get(index: Int): Byte = data[index]
+    val size get() = _data.size
+    operator fun get(index: Int): Byte = _data[index]
 
     val isValidUID: Boolean
-        get() = data[4] == (data[0].toInt() xor data[1].toInt() xor data[2].toInt() xor data[3].toInt()).toByte()
+        get() = _data[4] == (_data[0].toInt() xor _data[1].toInt() xor _data[2].toInt() xor _data[3].toInt()).toByte()
 
     override fun toString(): String {
-        return "Block(${data.toHexString()})"
+        return "Block(${_data.toHexString()})"
     }
 
 }

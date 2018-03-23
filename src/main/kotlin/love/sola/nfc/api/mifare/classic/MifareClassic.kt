@@ -6,7 +6,6 @@ import love.sola.nfc.api.mifare.classic.data.Block
 import love.sola.nfc.api.mifare.classic.data.Key
 import love.sola.nfc.util.hexToByteArray
 import love.sola.nfc.util.toHexString
-import org.slf4j.LoggerFactory
 import javax.smartcardio.Card
 import javax.smartcardio.CardException
 import javax.smartcardio.CommandAPDU
@@ -15,11 +14,7 @@ import javax.smartcardio.ResponseAPDU
 /**
  * @author Sola
  */
-class MifareClassic(val card: Card) {
-
-    companion object {
-        val log = LoggerFactory.getLogger(MifareClassic::class.java)
-    }
+class MifareClassic(private val card: Card) {
 
     val type = MifareClassicCardType.fromATR(card.atr)
 
@@ -43,7 +38,7 @@ class MifareClassic(val card: Card) {
         return transmit(
             CommandAPDU(
                 0xFF, 0xD6, 0x00, index,
-                block.data
+                block.data()
             )
         ).sw == 0x9000
     }
@@ -56,7 +51,7 @@ class MifareClassic(val card: Card) {
         return transmit(
             CommandAPDU(
                 0xFF, 0x82, 0x00, 0x00,
-                key.data
+                key.data()
             )
         ).sw == 0x9000
     }
@@ -96,7 +91,7 @@ class MifareClassic(val card: Card) {
         transmit("FF00000005D408633D00")
         transmit("FF00000003D44243")
         transmit("FF00000008D408630280630380")
-        transmit("FF00000015D44001A000" + uid.data.toHexString())
+        transmit("FF00000015D44001A000" + uid.data().toHexString())
     }
 
     @Throws(CardException::class)

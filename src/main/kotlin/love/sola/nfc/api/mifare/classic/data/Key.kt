@@ -8,20 +8,22 @@ import java.util.*
 /**
  * @author Sola
  */
-class Key(val data: ByteArray) : Cloneable, Serializable {
+class Key(private val _data: ByteArray) : Cloneable, Serializable {
 
     constructor(data: String) : this(data.hexToByteArray())
 
     init {
-        check(data.size == 6) { "Key data must contains 6 bytes" }
+        check(_data.size == 6) { "Key data must contains 6 bytes" }
     }
 
     companion object {
         val DEFAULT = Key(ByteArray(6) { 0xFF.toByte() })
     }
 
+    fun data() = _data.clone()
+
     override fun toString(): String {
-        return "Key(${data.toHexString()})"
+        return "Key(${_data.toHexString()})"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -30,12 +32,12 @@ class Key(val data: ByteArray) : Cloneable, Serializable {
 
         other as Key
 
-        if (!Arrays.equals(data, other.data)) return false
+        if (!Arrays.equals(_data, other._data)) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return Arrays.hashCode(data)
+        return Arrays.hashCode(_data)
     }
 }

@@ -13,8 +13,8 @@ enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val 
     MIFARE_CLASSIC_1K(0x00, 0x01, 1024, (3..63 step 4).toList().toIntArray()),
     MIFARE_CLASSIC_4K(0x00, 0x02, 4096, ((3..127 step 4) union (143..255 step 16)).toList().toIntArray());
 
-    val sectorsCount get() = layout.size
-    val blocksCount get() = layout.last() + 1
+    val totalSectors get() = layout.size
+    val totalBlocks get() = layout.last() + 1
 
     fun sectorIndexOf(blockIndex: Int): Int {
         for ((index, value) in layout.withIndex()) {
@@ -30,7 +30,7 @@ enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val 
         return sectorStart + blockIndexOfSector
     }
 
-    fun defaultDump() = Array(blocksCount) { Block.DEFAULT }.apply {
+    fun defaultDump() = Array(totalBlocks) { Block.DEFAULT }.apply {
         layout.forEach { index ->
             set(index, Block.DEFAULT_TRAILER)
         }

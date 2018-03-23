@@ -6,17 +6,19 @@ import java.util.*
 /**
  * @author Sola
  */
-class Sector(private val blocks: Array<Block>) : Cloneable, Serializable {
+class Sector(private val _data: Array<Block>) : Cloneable, Serializable {
 
-    val keyA get () = Key(blocks.last().data.copyOfRange(0, 6))
-    val keyB get () = Key(blocks.last().data.copyOfRange(10, 16))
-    val accessBits get () = AccessBits(blocks.last().data.copyOfRange(6, 9))
+    val keyA get () = Key(_data.last().data().copyOfRange(0, 6))
+    val keyB get () = Key(_data.last().data().copyOfRange(10, 16))
+    val accessBits get () = AccessBits(_data.last().data().copyOfRange(6, 9))
 
-    val size get() = blocks.size
-    operator fun get(index: Int): Block = blocks[index]
+    fun data() = _data.clone()
+
+    val size get() = _data.size
+    operator fun get(index: Int): Block = _data[index]
 
     override fun toString(): String {
-        return "Sector(${Arrays.toString(blocks)})"
+        return "Sector(${Arrays.toString(_data)})"
     }
 
 }

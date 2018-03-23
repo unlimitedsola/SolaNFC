@@ -14,7 +14,7 @@ waitDisconnect()
 println("Done. Please re-place the card.")
 card = getCard()!!
 print("Verifying UID...")
-if (card.getUID().contentEquals(uid.data.copyOf(4))) {
+if (card.getUID().contentEquals(uid.data().copyOf(4))) {
     println("Success.")
 } else {
     println("Failed. the card's UID:${card.getUID().toHexString()} is not what expected.")
