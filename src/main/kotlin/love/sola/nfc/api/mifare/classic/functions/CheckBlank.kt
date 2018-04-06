@@ -2,9 +2,13 @@ package love.sola.nfc.api.mifare.classic.functions
 
 import love.sola.nfc.api.mifare.classic.MifareClassic
 import love.sola.nfc.api.mifare.classic.constants.KeyType
+import love.sola.nfc.api.mifare.classic.data.AccessBits
 import love.sola.nfc.api.mifare.classic.data.Block
 import love.sola.nfc.api.mifare.classic.data.Key
 
+
+private val WEIRD_DEFAULT_TRAILER =
+    Block(Key("000000000000").data() + AccessBits.DEFAULT.data() + Key.DEFAULT.data())
 
 fun MifareClassic.isBlank(): Boolean {
 
@@ -17,6 +21,7 @@ fun MifareClassic.isBlank(): Boolean {
         if (authBlock(Key.DEFAULT, index, KeyType.A)) {
             val isDefault = if (isTrailerBlock(index)) {
                 readBlock(index) == Block.DEFAULT_TRAILER
+                        || readBlock(index) == WEIRD_DEFAULT_TRAILER
             } else {
                 readBlock(index) == Block.DEFAULT
             }
@@ -31,6 +36,7 @@ fun MifareClassic.isBlank(): Boolean {
             return false
         }
     }
+    println() // start a new line because we were printing status
     return true
 }
 
