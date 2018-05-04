@@ -20,6 +20,7 @@ fun MifareClassic.format(keyChain: KeyChain, dump: Dump) {
     for (sector in 0 until dump.size) {
         loop@ for (block in 0 until dump[sector].size) {
             val index = type.blockIndexOf(sector, block)
+            if (index == 0) continue
             for (keyType in KeyType.values()) {
                 if (authBlock(keyChain[sector][keyType], index, keyType) &&
                     writeBlock(index, dump[sector][block])
