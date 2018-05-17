@@ -35,5 +35,6 @@ fun MifareClassic.dump(keyChain: KeyChain): Dump {
         println() // start a new line because we were printing status
         throw IllegalAccessException("Failed to auth block $index (sector: $sectorIndex).")
     }
+    println()
     return Dump.parse(blocks.requireNoNulls())
 }

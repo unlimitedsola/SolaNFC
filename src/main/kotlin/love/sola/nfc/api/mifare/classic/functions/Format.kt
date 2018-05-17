@@ -34,4 +34,5 @@ fun MifareClassic.format(keyChain: KeyChain, dump: Dump) {
             throw IllegalAccessException("Failed to auth block $index (sector: $sector).")
         }
     }
+    println()
 }
