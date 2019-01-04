@@ -6,7 +6,6 @@ import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.scene.layout.Priority
 import tornadofx.*
-import java.lang.Exception
 import java.util.logging.Level
 import javax.smartcardio.CardTerminal
 import javax.smartcardio.TerminalFactory
@@ -41,10 +40,10 @@ class TerminalSelectView : View("Select Card Terminal") {
     }
 
     private fun getTerminals(): List<CardTerminal> {
-        try {
+        return try {
             val factory = TerminalFactory.getInstance("PC/SC", null)
             log.info("Terminal Factory: $factory")
-            return factory.terminals().list()
+            factory.terminals().list()
         } catch (e: Exception) {
             log.log(Level.SEVERE, "Get card terminals failed.", e)
             alert(
@@ -53,7 +52,7 @@ class TerminalSelectView : View("Select Card Terminal") {
                 e.message ?: "",
                 ButtonType.OK
             )
-            return emptyList()
+            emptyList()
         }
     }
 

@@ -4,7 +4,6 @@ import love.sola.nfc.api.mifare.classic.constants.MifareClassicCardType
 import java.io.Serializable
 import java.util.*
 
-
 class KeyChain(private val _data: Array<KeyPair>) : Cloneable, Serializable {
 
     companion object {

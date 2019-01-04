@@ -6,7 +6,6 @@ import love.sola.nfc.api.mifare.classic.data.AccessBits
 import love.sola.nfc.api.mifare.classic.data.Block
 import love.sola.nfc.api.mifare.classic.data.Key
 
-
 private val WEIRD_DEFAULT_TRAILER =
     Block(Key("000000000000").data() + AccessBits.DEFAULT.data() + Key.DEFAULT.data())
 

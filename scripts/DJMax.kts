@@ -2,7 +2,6 @@ import love.sola.nfc.api.getCard
 import love.sola.nfc.api.mifare.classic.constants.KeyType
 import love.sola.nfc.api.mifare.classic.data.Block
 import love.sola.nfc.api.mifare.classic.data.Key
-import love.sola.nfc.api.mifare.classic.functions.isBlank
 import love.sola.nfc.api.waitDisconnect
 import java.util.*
 

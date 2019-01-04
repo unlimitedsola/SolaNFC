@@ -3,7 +3,6 @@ package love.sola.nfc.api.mifare.classic.data
 import love.sola.nfc.api.mifare.classic.constants.KeyType
 import java.io.Serializable
 
-
 data class KeyPair(val keyA: Key, val keyB: Key) : Cloneable, Serializable {
 
     companion object {

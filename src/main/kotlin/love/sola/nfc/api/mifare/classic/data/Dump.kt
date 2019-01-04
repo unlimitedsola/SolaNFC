@@ -16,7 +16,7 @@ class Dump(private val _data: Array<Sector>) : Cloneable, Serializable {
 
         fun parse(data: ByteArray): Dump {
             val type = MifareClassicCardType.values().firstOrNull { data.size == it.size }
-                    ?: throw IllegalArgumentException("Invalid dump size (${data.size}).")
+                ?: throw IllegalArgumentException("Invalid dump size (${data.size}).")
             val ins = data.inputStream()
             val buf = ByteArray(16)
             val blocks = Array(type.totalBlocks) {
@@ -28,7 +28,7 @@ class Dump(private val _data: Array<Sector>) : Cloneable, Serializable {
 
         fun parse(blocks: Array<Block>): Dump {
             val type = MifareClassicCardType.values().firstOrNull { blocks.size == it.totalBlocks }
-                    ?: throw IllegalArgumentException("Invalid block size (${blocks.size})")
+                ?: throw IllegalArgumentException("Invalid block size (${blocks.size})")
             val sectors = arrayListOf<Sector>()
             var prev = 0
             for (sectorIndex in type.layout) {
