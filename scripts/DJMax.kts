@@ -20,6 +20,7 @@ while (true) {
     val card = getCard()!!
 
     if (card.authBlock(Key.DEFAULT, 0, KeyType.A)) {
+        println("Blank card detected, creating new version 3 card.")
         val serial = genSerial()
         println("Serial: $serial")
         val data1 = Block(serial.substring(0, 16).toByteArray(Charsets.US_ASCII))
@@ -28,19 +29,16 @@ while (true) {
         card.writeBlock(2, data2)
         card.writeBlock(3, trailerBlock)
         println("Done.")
+    } else if (card.authBlock(keyA, 0, KeyType.A)) {
+        val data1 = card.readBlock(1)
+        val data2 = card.readBlock(2)
+        val serial = (data1.data() + data2.data()).toString(Charsets.US_ASCII).take(20)
+        println("Version 3 card, Serial: $serial")
     } else {
-        if (card.authBlock(keyA, 0, KeyType.A)) {
-            val data1 = card.readBlock(1)
-            val data2 = card.readBlock(2)
-            val serial = (data1.data() + data2.data()).toString(Charsets.US_ASCII).take(20)
-            println("Formatted card, Serial: $serial")
-        } else {
-            println("Invalid card.")
-        }
+        println("Invalid card.")
     }
     waitDisconnect()
 }
-
 
 fun genSerial(): String {
     val sb = StringBuilder()
