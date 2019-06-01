@@ -19,7 +19,7 @@ class MifareClassic(private val card: Card) {
     val type = MifareClassicCardType.fromATR(card.atr)
 
     fun getUID(): ByteArray {
-        val response = transmit("FFCA000000")
+        val response = transmit(CommandAPDU(0xFF, 0xCA, 0x00, 0x00))
         if (response.sw != 0x9000) {
             throw CardException("Operation failed.")
         }
@@ -84,21 +84,21 @@ class MifareClassic(private val card: Card) {
 
     fun modifyUID(uid: Block) {
         // dirty back door for chinese clone version
-        transmit("FF00000008D408630200630300")
-        transmit("FF00000006D442500057CD")
-        transmit("FF00000005D408633D07")
-        transmit("FF00000003D44240")
-        transmit("FF00000005D408633D00")
-        transmit("FF00000003D44243")
-        transmit("FF00000008D408630280630380")
-        transmit("FF00000015D44001A000" + uid.data().toHexString())
+        transmit("D408630200630300")
+        transmit("D442500057CD")
+        transmit("D408633D07")
+        transmit("D44240")
+        transmit("D408633D00")
+        transmit("D44243")
+        transmit("D408630280630380") //Unlock
+        transmit("D44001A000" + uid.data().toHexString())
     }
 
     @Throws(CardException::class)
     fun transmit(data: String): ResponseAPDU = transmit(data.hexToByteArray())
 
     @Throws(CardException::class)
-    fun transmit(data: ByteArray): ResponseAPDU = transmit(CommandAPDU(data))
+    fun transmit(data: ByteArray): ResponseAPDU = transmit(CommandAPDU(0xFF, 0x00, 0x00, 0x00, data))
 
     @Throws(CardException::class)
     fun transmit(cmd: CommandAPDU): ResponseAPDU = card.basicChannel.transmit(cmd)
