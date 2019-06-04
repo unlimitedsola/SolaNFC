@@ -38,3 +38,22 @@ fun MifareClassic.dump(keyChain: KeyChain): Dump {
     println()
     return Dump.parse(blocks.requireNoNulls())
 }
+
+fun MifareClassic.unlockedDump(): Dump {
+    if (!unlocked) throw IllegalStateException("Card is not unlocked")
+    val blocks = arrayOfNulls<Block>(type.totalBlocks)
+
+    val status = Array(type.totalBlocks) { false }
+
+    fun statusToString() = status.map { if (it) '=' else '.' }.joinToString(separator = "")
+    fun printStatus() = print("\rDumping: [${statusToString()}] ")
+
+    repeat(type.totalBlocks) { index ->
+        blocks[index] = readBlock(index)
+        status[index] = true
+        printStatus()
+        return@repeat
+    }
+    println()
+    return Dump.parse(blocks.requireNoNulls())
+}

@@ -9,7 +9,8 @@ var card = getCard()!!
 println("Card detected, origin UID:${card.getUID().toHexString()}")
 println("Modifying UID block...")
 println("(if you get stuck here, please remove the card from your card reader.)")
-card.modifyUID(uid)
+card.unlock()
+card.writeBlock(0, uid)
 waitDisconnect()
 println("Done. Please re-place the card.")
 card = getCard()!!
