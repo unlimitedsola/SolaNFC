@@ -36,3 +36,29 @@ fun MifareClassic.format(keyChain: KeyChain, dump: Dump) {
     }
     println()
 }
+
+/**
+ * NOTE: this method will also write the UID Block (block 0)
+ */
+fun MifareClassic.unlockedFormat(dump: Dump) {
+    if (!unlocked) throw IllegalStateException("Card is not unlocked")
+    if (dump.size != type.totalSectors) {
+        throw IllegalArgumentException("dump's size doesn't match the current card.")
+    }
+    val status = Array(type.totalBlocks) { false }
+
+    fun statusToString() = status.map { if (it) '=' else '.' }.joinToString(separator = "")
+    fun printStatus() = print("\rFormatting: [${statusToString()}] ")
+
+
+    for (sector in 0 until dump.size) {
+        loop@ for (block in 0 until dump[sector].size) {
+            val index = type.blockIndexOf(sector, block)
+            writeBlock(index, dump[sector][block])
+            status[index] = true
+            printStatus()
+            continue@loop
+        }
+    }
+    println()
+}
