@@ -48,7 +48,7 @@ enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val 
         fun fromATR(atr: ATR): MifareClassicCardType {
             if (atr.bytes[12] != ISO_14443A_STANDARD)
                 throw UnsupportedOperationException("Unsupported standard. only ISO 14443A Part3 standard supported.")
-            return MifareClassicCardType.values().firstOrNull { type ->
+            return values().firstOrNull { type ->
                 atr.bytes[13] == type.c0 && atr.bytes[14] == type.c1
             } ?: throw UnsupportedOperationException("Unknown card type for C0=${atr.bytes[13]} C1=${atr.bytes[14]}")
         }

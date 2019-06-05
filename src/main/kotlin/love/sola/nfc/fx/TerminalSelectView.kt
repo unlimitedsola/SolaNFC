@@ -15,10 +15,10 @@ import javax.smartcardio.TerminalFactory
  */
 class TerminalSelectView : View("Select Card Terminal") {
 
-    val terminals = SimpleListProperty<CardTerminal>(getTerminals().observable())
+    val terminals = SimpleListProperty<CardTerminal>(getTerminals().asObservable())
 
     override val root = hbox(spacing = 10) {
-        padding = tornadofx.insets(all = 5)
+        padding = insets(all = 5)
         alignment = Pos.CENTER_LEFT
         isFillHeight = true
         label("Card Reader:")
@@ -27,7 +27,7 @@ class TerminalSelectView : View("Select Card Terminal") {
         }
         button("Refresh") {
             action {
-                terminals.set(getTerminals().observable())
+                terminals.set(getTerminals().asObservable())
             }
         }
         pane { hgrow = Priority.ALWAYS }

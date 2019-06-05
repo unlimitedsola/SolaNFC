@@ -29,7 +29,7 @@ class MainView : View("SolaNFCFx") {
             menu("Help") { }
         }
         borderpane {
-            padding = tornadofx.insets(5)
+            padding = insets(5)
             vgrow = Priority.ALWAYS
             prefHeight = 480.0
             prefWidth = 640.0
@@ -51,7 +51,7 @@ class MainView : View("SolaNFCFx") {
             }
         }
         hbox {
-            padding = tornadofx.insets(horizontal = 5)
+            padding = insets(horizontal = 5)
             border = Border(
                 BorderStroke(
                     Color.LIGHTGRAY,
