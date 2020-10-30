@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
 }
 
 group 'love.sola.nfc'
@@ -27,7 +27,7 @@ dependencies {
     compile 'org.jetbrains.kotlin:kotlin-script-util'
     runtime "org.jetbrains.kotlin:kotlin-compiler-embeddable"
     runtime "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable"
-    compile 'no.tornado:tornadofx:1.7.19'
+    compile 'no.tornado:tornadofx:1.7.20'
     compile 'com.github.thomasnield:rxkotlinfx:2.2.2'
     compile 'commons-codec:commons-codec:1.12'
     testCompile 'junit:junit:4.12'
