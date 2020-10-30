@@ -15,7 +15,7 @@ import javax.smartcardio.TerminalFactory
  */
 class TerminalSelectView : View("Select Card Terminal") {
 
-    val terminals = SimpleListProperty<CardTerminal>(getTerminals().asObservable())
+    val terminals = SimpleListProperty(getTerminals().asObservable())
 
     override val root = hbox(spacing = 10) {
         padding = insets(all = 5)
@@ -55,5 +55,4 @@ class TerminalSelectView : View("Select Card Terminal") {
             emptyList()
         }
     }
-
 }

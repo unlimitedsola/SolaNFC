@@ -53,5 +53,4 @@ enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val 
             } ?: throw UnsupportedOperationException("Unknown card type for C0=${atr.bytes[13]} C1=${atr.bytes[14]}")
         }
     }
-
 }
