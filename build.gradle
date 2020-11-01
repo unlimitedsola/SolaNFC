@@ -8,11 +8,17 @@ group 'love.sola.nfc'
 version '1.0-SNAPSHOT'
 
 compileKotlin {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+    kotlinOptions {
+        freeCompilerArgs += ['-Xjvm-default=all']
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
 }
 
 compileTestKotlin {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+    kotlinOptions {
+        freeCompilerArgs += ['-Xjvm-default=all']
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
 }
 
 mainClassName = 'love.sola.nfc.SolaNFCKt'
