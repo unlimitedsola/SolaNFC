@@ -59,8 +59,8 @@ class MifareClassic(private val card: Card) {
         }.sw == 0x9000
     }
 
-    fun authBlock(key: Key, block: Int, type: KeyType): Boolean {
-        return loadKey(key) && authKey(block, type)
+    fun authBlock(index: Int, type: KeyType, key: Key): Boolean {
+        return loadKey(key) && authKey(index, type)
     }
 
     fun loadKey(key: Key): Boolean {

@@ -20,7 +20,7 @@ val trailerBlock = Block("3721536A7240FF078069FFFFFFFFFFFF")
 while (true) {
     val card = getCard()!!
 
-    if (card.authBlock(Key.DEFAULT, 0, KeyType.A)) {
+    if (card.authBlock(0, KeyType.A, Key.DEFAULT)) {
         println("Blank card detected, creating new version 3 card.")
         val serial = genSerial()
         println("Serial: $serial")
@@ -30,12 +30,12 @@ while (true) {
         card.writeBlock(2, data2)
         card.writeBlock(3, trailerBlock)
         println("Done.")
-    } else if (card.authBlock(version2KeyA, 0, KeyType.A)) {
+    } else if (card.authBlock(0, KeyType.A, version2KeyA)) {
         val data1 = card.readBlock(1)
         val data2 = card.readBlock(2)
         val serial = (data1.data() + data2.data()).toString(Charsets.US_ASCII).take(20)
         println("Version 2 card, Serial: $serial")
-    } else if (card.authBlock(version3KeyA, 0, KeyType.A)) {
+    } else if (card.authBlock(0, KeyType.A, version3KeyA)) {
         val data1 = card.readBlock(1)
         val data2 = card.readBlock(2)
         val serial = (data1.data() + data2.data()).toString(Charsets.US_ASCII).take(20)

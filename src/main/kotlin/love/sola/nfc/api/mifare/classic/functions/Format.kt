@@ -4,61 +4,57 @@ import love.sola.nfc.api.mifare.classic.MifareClassic
 import love.sola.nfc.api.mifare.classic.constants.KeyType
 import love.sola.nfc.api.mifare.classic.data.Dump
 import love.sola.nfc.api.mifare.classic.data.KeyChain
+import love.sola.nfc.api.progress.IndexedProgressHandler
 
 /**
  * @author Sola
  */
-fun MifareClassic.format(keyChain: KeyChain, dump: Dump) {
+fun MifareClassic.format(keyChain: KeyChain, dump: Dump, progressHandler: IndexedProgressHandler<KeyType>? = null) {
     if (dump.size != type.totalSectors) {
         throw IllegalArgumentException("dump's size doesn't match the current card.")
     }
-    val status = Array<KeyType?>(type.totalBlocks) { null }
 
-    fun statusToString() = status.map { it?.name ?: '.' }.joinToString(separator = "")
-    fun printStatus() = print("\rFormatting: [${statusToString()}] ")
+    progressHandler?.onInit(type.totalBlocks)
 
     for (sector in 0 until dump.size) {
         loop@ for (block in 0 until dump[sector].size) {
             val index = type.blockIndexOf(sector, block)
             if (index == 0) continue
             for (keyType in KeyType.values()) {
-                if (authBlock(keyChain[sector][keyType], index, keyType) &&
+                if (authBlock(index, keyType, keyChain[sector][keyType]) &&
                     writeBlock(index, dump[sector][block])
                 ) {
-                    status[index] = keyType
-                    printStatus()
+                    progressHandler?.onUpdate(index, keyType)
                     continue@loop
                 }
             }
-            println() // start a new line because we were printing status
+            progressHandler?.onFinish()
             throw IllegalAccessException("Failed to auth block $index (sector: $sector).")
         }
     }
-    println()
+
+    progressHandler?.onFinish()
 }
 
 /**
  * NOTE: this method will also write the UID Block (block 0)
  */
-fun MifareClassic.unlockedFormat(dump: Dump) {
+fun MifareClassic.unlockedFormat(dump: Dump, progressHandler: IndexedProgressHandler<Boolean>? = null) {
     if (!unlocked) throw IllegalStateException("Card is not unlocked")
     if (dump.size != type.totalSectors) {
         throw IllegalArgumentException("dump's size doesn't match the current card.")
     }
-    val status = Array(type.totalBlocks) { false }
 
-    fun statusToString() = status.map { if (it) '=' else '.' }.joinToString(separator = "")
-    fun printStatus() = print("\rFormatting: [${statusToString()}] ")
-
+    progressHandler?.onInit(type.totalBlocks)
 
     for (sector in 0 until dump.size) {
         loop@ for (block in 0 until dump[sector].size) {
             val index = type.blockIndexOf(sector, block)
             writeBlock(index, dump[sector][block])
-            status[index] = true
-            printStatus()
+            progressHandler?.onUpdate(index, true)
             continue@loop
         }
     }
-    println()
+
+    progressHandler?.onFinish()
 }
