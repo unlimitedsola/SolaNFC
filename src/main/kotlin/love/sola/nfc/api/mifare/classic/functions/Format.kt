@@ -47,6 +47,10 @@ fun MifareClassic.unlockedFormat(dump: Dump, progressHandler: IndexedProgressHan
 
     progressHandler?.onInit(type.totalBlocks)
 
+    if (!dump.isValidUID) {
+        throw IllegalArgumentException("Attempting to write an invalid UID Block. Invalid UID will brick the card.")
+    }
+
     for (sector in 0 until dump.size) {
         loop@ for (block in 0 until dump[sector].size) {
             val index = type.blockIndexOf(sector, block)
