@@ -6,7 +6,6 @@ import javax.smartcardio.ATR
 
 /**
  * Only ISO 14443A, Part3 standard supported (0x03)
- * @author Sola
  */
 enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val layout: IntArray) {
 
