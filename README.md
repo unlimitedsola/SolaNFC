@@ -29,8 +29,8 @@ SolaNFC provides you the ability to write concise scripts with code completion a
 
 ### Prerequisites
 
-- Java Development Kit(JDK) 1.8 (higher than 1.8 are untested)
-- Intellij IDEA 2019.2 or above
+- Java Development Kit(JDK) 11 or higher (higher than 15 are untested)
+- Intellij IDEA 2020.2 or above
 
 ### Installation
 
