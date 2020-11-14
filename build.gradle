@@ -31,8 +31,8 @@ dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     compile "org.jetbrains.kotlin:kotlin-reflect"
     compile 'org.jetbrains.kotlin:kotlin-script-util'
-    runtime "org.jetbrains.kotlin:kotlin-compiler-embeddable"
-    runtime "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable"
+    compile "org.jetbrains.kotlin:kotlin-compiler-embeddable"
+    compile "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable"
     compile 'commons-codec:commons-codec:1.12'
     testCompile 'junit:junit:4.12'
 }
