@@ -3,9 +3,6 @@ package love.sola.nfc.api
 import love.sola.nfc.api.mifare.classic.MifareClassic
 import javax.smartcardio.TerminalFactory
 
-/**
- * @author Sola
- */
 private val terminal by lazy {
     TerminalFactory.getDefault().terminals().list()[0]
 }

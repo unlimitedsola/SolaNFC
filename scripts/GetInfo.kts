@@ -4,9 +4,6 @@ import love.sola.nfc.api.waitDisconnect
 import love.sola.nfc.cli.progress.BooleanConsoleProgressHandler
 import org.jetbrains.kotlin.daemon.common.toHexString
 
-/**
- * @author Sola
- */
 while (true) {
     try {
         val card = getCard()!!

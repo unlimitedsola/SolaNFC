@@ -6,9 +6,6 @@ import love.sola.nfc.api.mifare.classic.data.Dump
 import love.sola.nfc.api.mifare.classic.data.KeyChain
 import love.sola.nfc.api.progress.IndexedProgressHandler
 
-/**
- * @author Sola
- */
 fun MifareClassic.format(keyChain: KeyChain, dump: Dump, progressHandler: IndexedProgressHandler<KeyType>? = null) {
     if (dump.size != type.totalSectors) {
         throw IllegalArgumentException("dump's size doesn't match the current card.")

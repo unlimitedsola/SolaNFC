@@ -5,9 +5,6 @@ import love.sola.nfc.api.waitDisconnect
 import love.sola.nfc.cli.progress.BooleanConsoleProgressHandler
 import love.sola.nfc.util.toHexString
 
-/**
- * @author Sola
- */
 var card = getCard()!!
 println("uid = ${card.getUID().toHexString()}")
 card.unlock()

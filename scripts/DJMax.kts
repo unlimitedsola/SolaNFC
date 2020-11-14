@@ -5,7 +5,7 @@ import love.sola.nfc.api.mifare.classic.data.Key
 import love.sola.nfc.api.waitDisconnect
 import java.util.*
 
-/**
+/*
  * This script provides following functions:
  *  - create a new DJMAX Techinka 3 card
  *  - lookup DJMAX Technika 2/3 card's serial number

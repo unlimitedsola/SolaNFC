@@ -2,9 +2,6 @@ package love.sola.nfc.cli.progress
 
 import love.sola.nfc.api.progress.IndexedProgressHandler
 
-/**
- * @author Sola
- */
 abstract class ConsoleIndexedProgressHandler<T>(val processName: String) : IndexedProgressHandler<T> {
 
     private lateinit var status: Array<T?>

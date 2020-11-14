@@ -8,9 +8,6 @@ import love.sola.nfc.api.mifare.classic.data.KeyChain
 import love.sola.nfc.api.progress.IndexedProgressHandler
 import javax.smartcardio.CardException
 
-/**
- * @author Sola
- */
 fun MifareClassic.dump(keyChain: KeyChain, progressHandler: IndexedProgressHandler<KeyType>? = null): Dump {
     val blocks = arrayOfNulls<Block>(type.totalBlocks)
 

@@ -3,9 +3,6 @@ package love.sola.nfc.api.mifare.classic.data
 import java.io.Serializable
 import java.util.*
 
-/**
- * @author Sola
- */
 class Sector(private val _data: Array<Block>) : Cloneable, Serializable {
 
     val keyA get () = Key(_data.last().data().copyOfRange(0, 6))

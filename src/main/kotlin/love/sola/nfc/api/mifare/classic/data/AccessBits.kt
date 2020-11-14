@@ -4,9 +4,6 @@ import love.sola.nfc.util.hexToByteArray
 import java.io.Serializable
 import kotlin.experimental.inv
 
-/**
- * @author Sola
- */
 class AccessBits(private val _data: ByteArray) : Cloneable, Serializable {
 
     companion object {

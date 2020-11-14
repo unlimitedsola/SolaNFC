@@ -4,9 +4,6 @@ import love.sola.nfc.api.mifare.classic.constants.MifareClassicCardType
 import java.io.Serializable
 import java.util.*
 
-/**
- * @author Sola
- */
 class Dump(private val _data: Array<Sector>) : Cloneable, Serializable {
 
     companion object {

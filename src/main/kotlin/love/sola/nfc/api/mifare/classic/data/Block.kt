@@ -5,9 +5,6 @@ import love.sola.nfc.util.toHexString
 import java.io.Serializable
 import java.util.*
 
-/**
- * @author Sola
- */
 class Block(private val _data: ByteArray) : Cloneable, Serializable {
 
     companion object {

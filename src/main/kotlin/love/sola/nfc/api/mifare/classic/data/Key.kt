@@ -5,9 +5,6 @@ import love.sola.nfc.util.toHexString
 import java.io.Serializable
 import java.util.*
 
-/**
- * @author Sola
- */
 class Key(private val _data: ByteArray) : Cloneable, Serializable {
 
     constructor(data: String) : this(data.hexToByteArray())

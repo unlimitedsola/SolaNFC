@@ -12,9 +12,6 @@ import javax.smartcardio.CardException
 import javax.smartcardio.CommandAPDU
 import javax.smartcardio.ResponseAPDU
 
-/**
- * @author Sola
- */
 class MifareClassic(private val card: Card) {
 
     val type = MifareClassicCardType.fromATR(card.atr)
