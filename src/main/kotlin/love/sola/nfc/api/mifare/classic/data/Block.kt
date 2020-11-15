@@ -3,7 +3,6 @@ package love.sola.nfc.api.mifare.classic.data
 import love.sola.nfc.util.hexToByteArray
 import love.sola.nfc.util.toHexString
 import java.io.Serializable
-import java.util.*
 
 class Block(private val _data: ByteArray) : Cloneable, Serializable {
 
@@ -27,23 +26,22 @@ class Block(private val _data: ByteArray) : Cloneable, Serializable {
     val isValidUID: Boolean
         get() = _data[4] == (_data[0].toInt() xor _data[1].toInt() xor _data[2].toInt() xor _data[3].toInt()).toByte()
 
-    override fun toString(): String {
-        return "Block(${_data.toHexString()})"
-    }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
         other as Block
 
-        if (!Arrays.equals(_data, other._data)) return false
+        if (!_data.contentEquals(other._data)) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return Arrays.hashCode(_data)
+        return _data.contentHashCode()
     }
 
+    override fun toString(): String {
+        return "Block(${_data.toHexString()})"
+    }
 }

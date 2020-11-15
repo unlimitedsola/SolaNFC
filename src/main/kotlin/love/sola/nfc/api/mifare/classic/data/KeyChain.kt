@@ -2,7 +2,6 @@ package love.sola.nfc.api.mifare.classic.data
 
 import love.sola.nfc.api.mifare.classic.constants.MifareClassicCardType
 import java.io.Serializable
-import java.util.*
 
 class KeyChain(private val _data: Array<KeyPair>) : Cloneable, Serializable {
 
@@ -19,8 +18,22 @@ class KeyChain(private val _data: Array<KeyPair>) : Cloneable, Serializable {
 
     operator fun get(index: Int): KeyPair = _data[index]
 
-    override fun toString(): String {
-        return "KeyChain(${Arrays.toString(_data)})"
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as KeyChain
+
+        if (!_data.contentEquals(other._data)) return false
+
+        return true
     }
 
+    override fun hashCode(): Int {
+        return _data.contentHashCode()
+    }
+
+    override fun toString(): String {
+        return "KeyChain(${_data.contentToString()})"
+    }
 }

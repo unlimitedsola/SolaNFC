@@ -5,7 +5,7 @@ import love.sola.nfc.api.mifare.classic.data.Dump
 import javax.smartcardio.ATR
 
 /**
- * Only ISO 14443A, Part3 standard supported (0x03)
+ * Only ISO 14443A, Part3 standard is supported (0x03)
  */
 enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val layout: IntArray) {
 

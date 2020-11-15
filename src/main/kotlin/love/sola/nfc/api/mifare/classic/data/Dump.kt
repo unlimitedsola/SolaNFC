@@ -2,7 +2,6 @@ package love.sola.nfc.api.mifare.classic.data
 
 import love.sola.nfc.api.mifare.classic.constants.MifareClassicCardType
 import java.io.Serializable
-import java.util.*
 
 class Dump(private val _data: Array<Sector>) : Cloneable, Serializable {
 
@@ -50,8 +49,22 @@ class Dump(private val _data: Array<Sector>) : Cloneable, Serializable {
     val size get() = _data.size
     operator fun get(index: Int): Sector = _data[index]
 
-    override fun toString(): String {
-        return "Dump(${Arrays.toString(_data)})"
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Dump
+
+        if (!_data.contentEquals(other._data)) return false
+
+        return true
     }
 
+    override fun hashCode(): Int {
+        return _data.contentHashCode()
+    }
+
+    override fun toString(): String {
+        return "Dump(${_data.contentToString()})"
+    }
 }
