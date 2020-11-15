@@ -156,5 +156,4 @@ class MifareClassic(private val card: Card) {
     @Throws(CardException::class)
     fun transmitPn532(cmd: CommandAPDU, buffer: ByteBuffer): Int =
         card.basicChannel.transmit(ByteBuffer.wrap(cmd.bytes), buffer)
-
 }

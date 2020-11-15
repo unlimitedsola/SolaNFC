@@ -10,8 +10,7 @@ object Dojo {
         setIdeaIoUseFallback()
     }
 
-    val engine: ScriptEngine = ScriptEngineManager().getEngineByExtension("kts")
+    private val engine: ScriptEngine = ScriptEngineManager().getEngineByExtension("kts")
 
     fun script(script: String): Any? = engine.eval(script)
-
 }
