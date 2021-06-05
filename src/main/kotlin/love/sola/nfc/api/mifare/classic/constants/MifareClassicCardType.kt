@@ -9,6 +9,7 @@ import javax.smartcardio.ATR
  */
 enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val layout: IntArray) {
 
+    //FIXME: Support 0xFF 0x88 Infineon MIFARE Classic 1K
     MIFARE_CLASSIC_1K(0x00, 0x01, 1024, (3..63 step 4).toList().toIntArray()),
     MIFARE_CLASSIC_4K(
         0x00,
