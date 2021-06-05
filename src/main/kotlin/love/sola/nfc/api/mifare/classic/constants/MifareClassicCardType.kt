@@ -7,13 +7,10 @@ import javax.smartcardio.ATR
 /**
  * Only ISO 14443A, Part3 standard is supported (0x03)
  */
-enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val layout: IntArray) {
+enum class MifareClassicCardType(val size: Int, val layout: IntArray) {
 
-    //FIXME: Support 0xFF 0x88 Infineon MIFARE Classic 1K
-    MIFARE_CLASSIC_1K(0x00, 0x01, 1024, (3..63 step 4).toList().toIntArray()),
+    MIFARE_CLASSIC_1K(1024, (3..63 step 4).toList().toIntArray()),
     MIFARE_CLASSIC_4K(
-        0x00,
-        0x02,
         4096,
         ((3..127 step 4) union (143..255 step 16)).toList().toIntArray()
     );
@@ -48,9 +45,15 @@ enum class MifareClassicCardType(val c0: Byte, val c1: Byte, val size: Int, val 
         fun fromATR(atr: ATR): MifareClassicCardType {
             if (atr.bytes[12] != ISO_14443A_STANDARD)
                 throw UnsupportedOperationException("Unsupported standard. only ISO 14443A Part3 standard supported.")
-            return values().firstOrNull { type ->
-                atr.bytes[13] == type.c0 && atr.bytes[14] == type.c1
-            } ?: throw UnsupportedOperationException("Unknown card type for C0=${atr.bytes[13]} C1=${atr.bytes[14]}")
+            val c0 = atr.bytes[13].toInt()
+            val c1 = atr.bytes[14].toInt()
+            return when {
+                c0 == 0x00 && c1 == 0x01 -> MIFARE_CLASSIC_1K
+                // Infineon
+                c0 == 0xFF && c1 == 0x88 -> MIFARE_CLASSIC_1K
+                c0 == 0x00 && c1 == 0x02 -> MIFARE_CLASSIC_4K
+                else -> throw UnsupportedOperationException("Unknown card type for C0=${atr.bytes[13]} C1=${atr.bytes[14]}")
+            }
         }
     }
 }
