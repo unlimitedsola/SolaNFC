@@ -45,8 +45,8 @@ enum class MifareClassicCardType(val size: Int, val layout: IntArray) {
         fun fromATR(atr: ATR): MifareClassicCardType {
             if (atr.bytes[12] != ISO_14443A_STANDARD)
                 throw UnsupportedOperationException("Unsupported standard. only ISO 14443A Part3 standard supported.")
-            val c0 = atr.bytes[13].toInt()
-            val c1 = atr.bytes[14].toInt()
+            val c0 = atr.bytes[13].toUByte().toInt()
+            val c1 = atr.bytes[14].toUByte().toInt()
             return when {
                 c0 == 0x00 && c1 == 0x01 -> MIFARE_CLASSIC_1K
                 // Magic card
