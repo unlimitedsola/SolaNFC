@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
 }
 
 group 'love.sola.nfc'
@@ -23,14 +23,18 @@ compileTestKotlin {
 
 mainClassName = 'love.sola.nfc.SolaNFCKt'
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation "org.jetbrains.kotlin:kotlin-reflect"
     implementation 'org.jetbrains.kotlin:kotlin-script-util'
     implementation "org.jetbrains.kotlin:kotlin-compiler-embeddable"
     implementation "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable"
-    implementation 'commons-codec:commons-codec:1.12'
-    testImplementation 'junit:junit:4.12'
+    implementation 'commons-codec:commons-codec:1.15'
+    testImplementation 'junit:junit:4.13.2'
 }
 
 sourceSets {

@@ -49,6 +49,8 @@ enum class MifareClassicCardType(val size: Int, val layout: IntArray) {
             val c1 = atr.bytes[14].toInt()
             return when {
                 c0 == 0x00 && c1 == 0x01 -> MIFARE_CLASSIC_1K
+                // Magic card
+                c0 == 0x00 && c1 == 0x03 -> MIFARE_CLASSIC_1K
                 // Infineon
                 c0 == 0xFF && c1 == 0x88 -> MIFARE_CLASSIC_1K
                 c0 == 0x00 && c1 == 0x02 -> MIFARE_CLASSIC_4K
