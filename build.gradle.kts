@@ -23,7 +23,6 @@ dependencies {
     implementation(kotlin("script-util"))
     implementation(kotlin("compiler-embeddable"))
     implementation(kotlin("scripting-compiler-embeddable"))
-    implementation("commons-codec:commons-codec:1.15")
     testImplementation(kotlin("test-junit5"))
 }
 
