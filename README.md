@@ -8,7 +8,8 @@ tool by leveraging
 [Intellij IDEA](https://jetbrains.com/idea)
 and
 [Kotlin](https://kotlinlang.org/).
-SolaNFC provides you the ability to write concise scripts with code completion and easy execution, allows you to create your prototype rapidly.
+SolaNFC provides you the ability to write concise scripts with code completion and easy execution, allows you to create
+your prototype rapidly.
 
 ## Available Features
 
@@ -29,8 +30,8 @@ SolaNFC provides you the ability to write concise scripts with code completion a
 
 ### Prerequisites
 
-- Java Development Kit(JDK) 11 or higher (higher than 15 are untested)
-- Intellij IDEA 2020.2 or above
+- Java Development Kit(JDK) 17 or higher
+- Intellij IDEA 2023.1 or above
 
 ### Installation
 
@@ -51,7 +52,8 @@ You can get your current connected tag by invoking the `getCard` function.
 val card = getCard()!!
 ``` 
 
-After your operations are done, you can wait for your tag to disconnect by using `waitDisconnect`, this function blocks until the tag is disconnected.
+After your operations are done, you can wait for your tag to disconnect by using `waitDisconnect`, this function blocks
+until the tag is disconnected.
 
 ### Executing your script
 
