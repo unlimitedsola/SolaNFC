@@ -1,11 +1,14 @@
 package love.sola.nfc
 
-import love.sola.nfc.kts.Dojo
+import love.sola.nfc.kts.ScriptRunner
 import java.io.File
 
 fun main(args: Array<String>) {
-    val scriptName = args[0]
-    File("scripts/$scriptName.kts").readText().let {
-        Dojo.script(it)
+    if (args.isEmpty()) {
+        println("usage: <app> <script file>")
+        return
+    } else {
+        val scriptFile = args[0]
+        ScriptRunner.run(File(scriptFile))
     }
 }

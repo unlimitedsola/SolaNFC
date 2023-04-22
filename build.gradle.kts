@@ -20,9 +20,11 @@ repositories {
 
 dependencies {
     implementation(kotlin("reflect"))
-    implementation(kotlin("script-util"))
-    implementation(kotlin("compiler-embeddable"))
-    implementation(kotlin("scripting-compiler-embeddable"))
+    implementation(kotlin("scripting-common"))
+    implementation(kotlin("scripting-jvm"))
+    implementation(kotlin("scripting-jvm-host"))
+    implementation(kotlin("scripting-dependencies"))
+    implementation(kotlin("scripting-dependencies-maven"))
     testImplementation(kotlin("test-junit5"))
 }
 
@@ -34,14 +36,4 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-sourceSets {
-    create("scripts") {
-        resources.setSrcDirs(emptyList<String>())
-        java.setSrcDirs(emptyList<String>())
-        kotlin.setSrcDirs(listOf("scripts"))
-        compileClasspath += main.get().compileClasspath
-        compileClasspath += main.get().output
-    }
 }
