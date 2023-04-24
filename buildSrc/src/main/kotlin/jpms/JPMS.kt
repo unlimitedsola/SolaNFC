@@ -2,7 +2,7 @@ package jpms
 
 import org.gradlex.javamodule.moduleinfo.ExtraJavaModuleInfoPluginExtension
 
-fun ExtraJavaModuleInfoPluginExtension.defaultModule(
+fun ExtraJavaModuleInfoPluginExtension.defineModule(
     identifier: String,
     moduleName: String
 ) {
