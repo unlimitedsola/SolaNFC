@@ -11,5 +11,4 @@ application {
 dependencies {
     implementation(kotlin("reflect"))
     implementation(project(":kts"))
-    implementation(kotlin("scripting-jvm-host"))
 }
