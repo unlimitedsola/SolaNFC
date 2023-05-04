@@ -26,7 +26,7 @@ fun getUIDFromUserInput(): Block {
     while (true) {
         println("Type full UID block in hex (e.g. 3e0aa820bc080400018d56978c86d51d)")
         print("UID Block:")
-        uid = Block(readLine()!!.replace(" ", ""))
+        uid = Block(readln().replace(" ", ""))
         if (!uid.isValidUID) {
             println("uid = $uid is not a valid UID!")
         } else {
