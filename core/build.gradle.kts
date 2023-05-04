@@ -10,5 +10,5 @@ application {
 
 dependencies {
     implementation(kotlin("reflect"))
-    implementation(project(":kts"))
+    api(project(":kts"))
 }

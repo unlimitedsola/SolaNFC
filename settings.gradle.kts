@@ -1,3 +1,3 @@
 rootProject.name = "SolaNFC"
 
-include("core", "kts")
+include("core", "kts", "scripts")

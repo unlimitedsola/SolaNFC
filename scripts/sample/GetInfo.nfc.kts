@@ -2,7 +2,7 @@ import love.sola.nfc.api.getCard
 import love.sola.nfc.api.mifare.classic.functions.isBlank
 import love.sola.nfc.api.waitDisconnect
 import love.sola.nfc.cli.progress.BooleanConsoleProgressHandler
-import org.jetbrains.kotlin.daemon.common.toHexString
+import love.sola.nfc.util.toHexString
 
 while (true) {
     try {

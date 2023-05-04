@@ -38,7 +38,7 @@ your prototype rapidly.
 1. Clone this repository
 2. Import as Intellij IDEA project via `build.gralde` file.
 3. Wait for Intellij IDEA while creating the project structure.
-4. Create your script inside `scripts` folder.
+4. Create your script inside `scripts/custom` folder.
 
 ### Code Completion
 
@@ -61,4 +61,4 @@ Simply by right-clicking your current editing script inside Intellij IDEA and ch
 
 ### Going further
 
-For more examples, check out the existing scripts inside `scripts` folder.
+For more examples, check out the sample scripts inside `scripts/sample` folder.
