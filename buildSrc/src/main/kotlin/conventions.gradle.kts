@@ -15,9 +15,10 @@ dependencies {
     testImplementation(kotlin("test-junit5"))
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+kotlin {
+    jvmToolchain(21)
+    compilerOptions {
+        freeCompilerArgs.addAll("-Xjsr305=strict", "-Xjvm-default=all")
     }
 }
 
@@ -25,12 +26,6 @@ java {
 val compileJava: JavaCompile by tasks
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.destinationDirectory.set(compileJava.destinationDirectory)
-
-tasks.withType<KotlinCompile> {
-    compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict", "-Xjvm-default=all")
-    }
-}
 
 tasks.withType<Test> {
     useJUnitPlatform()
