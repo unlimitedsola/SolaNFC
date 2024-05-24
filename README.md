@@ -5,7 +5,7 @@ _A scriptable Mifare Classic tool._
 SolaNFC is a scriptable
 [Mifare Classic](https://en.wikipedia.org/wiki/MIFARE#MIFARE_Classic_family)
 tool by leveraging
-[Intellij IDEA](https://jetbrains.com/idea)
+[IntelliJ IDEA](https://jetbrains.com/idea)
 and
 [Kotlin](https://kotlinlang.org/).
 SolaNFC provides you the ability to write concise scripts with code completion and easy execution, allows you to create
@@ -30,19 +30,19 @@ your prototype rapidly.
 
 ### Prerequisites
 
-- Java Development Kit(JDK) 17 or higher
-- Intellij IDEA 2023.1 or above
+- Java Development Kit(JDK) 21 or higher
+- IntelliJ IDEA 2024.1 or above
 
 ### Installation
 
 1. Clone this repository
-2. Import as Intellij IDEA project via `build.gralde` file.
-3. Wait for Intellij IDEA while creating the project structure.
+2. Import as IntelliJ IDEA project via `build.gralde` file.
+3. Wait for IntelliJ IDEA while creating the project structure.
 4. Create your script inside `scripts/custom` folder.
 
 ### Code Completion
 
-Intellij IDEA should provide you code completion automatically.
+IntelliJ IDEA should provide you with code completion automatically.
 
 ### Your first line of code
 
@@ -57,7 +57,7 @@ until the tag is disconnected.
 
 ### Executing your script
 
-Simply by right-clicking your current editing script inside Intellij IDEA and choose `Run/Debug` action.
+Simply by right-clicking your current editing script inside IntelliJ IDEA and choose `Run/Debug` action.
 
 ### Going further
 
