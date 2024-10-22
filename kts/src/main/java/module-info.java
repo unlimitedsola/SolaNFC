@@ -5,4 +5,7 @@ module love.sola.nfc.kts {
     requires kotlin.scripting.common;
     requires kotlin.scripting.jvm;
     requires kotlin.scripting.jvm.host;
+
+    // ReflectionUtil in kotlin-script-embeddable uses Unsafe
+    requires jdk.unsupported;
 }
